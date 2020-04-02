@@ -73,6 +73,13 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
+  config.action_dispatch.default_headers = {
+    'Access-Control-Allow-Credentials' => 'true',
+    # TODO:本番にデプロイする場合は、本番のオリジンを許可するように。developとproductionで分けた方が良さそう
+    'Access-Control-Allow-Origin' => 'https://serene-einstein-1caf18.netlify.com',
+    'Access-Control-Request-Method' => '*'
+  }
+
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
